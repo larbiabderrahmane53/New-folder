@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CSCC Treasure Hunt</title>
+
+    <link rel="stylesheet" href="syntex.css">
+    <link rel="stylesheet" href="cscc-theme.css">
+</head>
+
+<body>
+
+    <!-- CSCC logo (defined once, reused with <use>) -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <symbol id="csccLogo" viewBox="0 0 200 200">
+            <circle cx="100" cy="28" r="22" fill="#eceef4"/>
+            <circle cx="35" cy="112" r="22" fill="#eceef4"/>
+            <circle cx="165" cy="112" r="22" fill="#eceef4"/>
+            <path d="M62 52 Q100 66 138 52 L150 76 Q100 96 50 76 Z" fill="#eceef4"/>
+            <path d="M46 138 Q62 152 80 156 L88 134 Q70 126 62 110 Z" fill="#eceef4"/>
+            <path d="M154 138 Q138 152 120 156 L112 134 Q130 126 138 110 Z" fill="#eceef4"/>
+            <circle cx="100" cy="92" r="20" fill="#3a8fc7"/>
+            <path d="M68 138 Q100 112 132 138 Q100 152 68 138 Z" fill="#3a8fc7"/>
+        </symbol>
+    </svg>
+
+    <div class="background-glow"></div>
+
+    <main class="app">
+
+        <!-- welcome -->
+
+        <section id="welcomeScreen" class="screen">
+
+            <div class="hero">
+
+                <div class="crest">
+                    <svg class="cscc-logo" role="img" aria-label="CSCC Dev Department Community">
+                        <use href="#csccLogo"/>
+                    </svg>
+                </div>
+
+                <p class="eyebrow">CSCC • WELCOME DAY</p>
+
+                <h1>
+                    TREASURE
+                    <span>HUNT</span>
+                </h1>
+
+                <div class="divider">
+                    <span>✦</span>
+                </div>
+
+                <p class="subtitle">
+                    Solve the challenge.<br>
+                    Follow the clue.<br>
+                    Find the treasure.
+                </p>
+
+            </div>
+
+            <div class="card start-card">
+
+                <div class="card-symbol">◈</div>
+
+                <h2>Enter the Hunt</h2>
+
+                <p>
+                    Every hunter gets a different path.
+                    Think carefully. Move quickly.
+                </p>
+
+                <input
+                    type="text"
+                    id="playerName"
+                    placeholder="Enter your nickname"
+                    maxlength="20"
+                >
+
+                <button id="startButton" class="main-button">
+                    BEGIN THE HUNT
+                    <span>→</span>
+                </button>
+
+                <p id="startError" class="error"></p>
+
+            </div>
+
+            <p class="bottom-note">
+                Solve • Search • Scan • Score
+            </p>
+
+            <p class="community-note">
+                <b>CSCC</b> Dev Department Community
+            </p>
+
+        </section>
+
+
+        <!-- game -->
+
+        <section id="gameScreen" class="screen hidden">
+
+            <header class="game-header">
+
+                <div class="player-info">
+                    <span>HUNTER</span>
+                    <strong id="displayName">Player</strong>
+                </div>
+
+                <div class="score-info">
+                    <span>HONOR</span>
+                    <strong>
+                        <b id="score">0</b>
+                        <small>PTS</small>
+                    </strong>
+                </div>
+
+            </header>
+
+            <div class="progress-line">
+                <div id="progressBar"></div>
+            </div>
+
+
+            <div class="card challenge-card">
+
+                <div class="challenge-header">
+
+                    <span class="section-label">
+                        SCROLL OF KNOWLEDGE
+                    </span>
+
+                    <span id="questionNumber">1 / 5</span>
+
+                </div>
+
+                <div class="question-mark">?</div>
+
+                <h2 id="question">
+                    Question goes here
+                </h2>
+
+                <div id="answers" class="answers"></div>
+
+                <div id="feedback" class="feedback"></div>
+
+            </div>
+
+
+            <div id="clueCard" class="card clue-card hidden">
+
+                <div class="section-label">
+                    TREASURE CLUE
+                </div>
+
+                <div class="scroll">
+
+                    <p class="scroll-title">
+                        Your path continues...
+                    </p>
+
+                    <p id="clueText"></p>
+
+                </div>
+
+                <button id="findQrButton" class="main-button">
+                    HUNT FOR THE QR
+                    <span>→</span>
+                </button>
+
+            </div>
+
+
+            <div id="qrCard" class="card qr-card hidden">
+
+                <div class="section-label">
+                    CHECKPOINT
+                </div>
+
+                <div class="qr-icon">⌗</div>
+
+                <h2>Find the hidden mark</h2>
+
+                <p>
+                    Follow your clue and find the QR
+                    checkpoint hidden in the department.
+                </p>
+
+                <button id="scanButton" class="main-button">
+                    SCAN CHECKPOINT
+                </button>
+
+                <div id="qrFeedback" class="feedback"></div>
+
+            </div>
+
+
+            <button id="nextButton" class="next-button hidden">
+                CONTINUE THE HUNT →
+            </button>
+
+        </section>
+
+
+        <!-- end -->
+
+        <section id="endScreen" class="screen hidden">
+
+            <div class="end-crest">
+                <svg class="cscc-logo" role="img" aria-label="CSCC Dev Department Community">
+                    <use href="#csccLogo"/>
+                </svg>
+            </div>
+
+            <p class="eyebrow">HUNT COMPLETE</p>
+
+            <h1>
+                WELL FOUGHT,
+                <span>HUNTER.</span>
+            </h1>
+
+            <div class="divider">
+                <span>✦</span>
+            </div>
+
+            <div class="card result-card">
+
+                <p>Final honor</p>
+
+                <strong id="finalScore">0</strong>
+
+                <span>POINTS</span>
+
+                <p id="finalMessage" class="final-message"></p>
+
+                <button id="restartButton" class="main-button">
+                    HUNT AGAIN
+                </button>
+
+            </div>
+
+
+            <div class="card leaderboard-card">
+
+                <div class="section-label">
+                    HALL OF HUNTERS
+                </div>
+
+                <div id="leaderboard"></div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

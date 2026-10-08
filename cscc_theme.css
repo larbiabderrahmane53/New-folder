@@ -1,0 +1,74 @@
+/* CSCC Dev Department theme: load AFTER syntex.css.
+   Adds the CSCC logo and blue accent on top of the existing gold/navy look. */
+
+:root {
+    --cscc-blue: #3a8fc7;
+    --cscc-blue-light: #5fb0e6;
+    --cscc-blue-dark: #2c75a8;
+    --cscc-ink: #eceef4;
+}
+
+/* logo replaces the crossed-swords crest */
+.crest,
+.end-crest {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 14px;
+    text-shadow: none;
+}
+
+.cscc-logo {
+    width: 110px;
+    height: 110px;
+    display: block;
+    filter: drop-shadow(0 0 18px rgba(58, 143, 199, 0.25));
+}
+
+.end-crest .cscc-logo {
+    width: 90px;
+    height: 90px;
+}
+
+/* blue accents: interactive elements */
+.background-glow {
+    background: var(--cscc-blue);
+    opacity: 0.12;
+}
+
+input:focus {
+    border-color: var(--cscc-blue);
+    box-shadow: 0 0 0 4px rgba(58, 143, 199, 0.22);
+}
+
+.main-button {
+    background: var(--cscc-blue-dark);
+    border-color: var(--cscc-blue);
+    color: #fff;
+}
+
+.main-button:hover {
+    background: var(--cscc-blue);
+    border-color: #c9a86a;
+    box-shadow: 0 0 22px rgba(58, 143, 199, 0.45);
+}
+
+.card {
+    border-top: 2px solid #c9a86a;
+}
+
+.card::before {
+    display: none;
+}
+
+/* community footer line */
+.community-note {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    color: #64748b;
+}
+
+.community-note b {
+    color: #c9a86a;
+}
